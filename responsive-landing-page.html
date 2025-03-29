@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Webpage</title>
+    <!-- Including Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        header { background: linear-gradient(135deg, #007bff, #333); color: #fff; padding: 1rem; text-align: center; }
+        header h1 { margin: 0; }
+
+        /* Hero section styling for a welcoming appearance */
+        .hero { padding: 2rem; text-align: center; background: #f4f4f4; height: 50vh;}
+        .hero h2 { margin-bottom: 0.5rem; }
+        .hero p { margin-bottom: 1rem; }
+        .hero button { padding: 0.5rem 1rem; background: #007bff; color: #fff; border: none; cursor: pointer; border-radius: 5px; }
+
+        /* Feature section using flexbox for responsiveness and gap between features */
+        .features { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; padding: 2rem; }
+        .feature { background: #eee; padding: 1rem; flex: 1 1 300px; max-width: 300px; text-align: center; border-radius: 8px; }
+        .feature i { font-size: 2rem; margin-bottom: 0.5rem; color: #007bff; }
+
+        /* Footer styling for consistent background and text alignment */
+        footer { background: linear-gradient(135deg,#333, #007bff); text-align: center; padding: 1rem; }
+        footer p { margin: 0.5rem 0; color: #f4f4f4;}
+
+        /* Responsive design for smaller screens */
+        @media (max-width: 600px) {
+            .features { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header section with the main title -->
+    <header>
+        <h1>Responsive Webpage</h1>
+    </header>
+
+    <!-- Hero section to introduce the service with a call-to-action button -->
+    <section class="hero">
+        <h2>Welcome to Our Service</h2>
+        <p>Discover the best solutions to meet your needs. We provide personalized services that exceed expectations.</p>
+        <button>Learn More</button>
+    </section>
+
+    <!-- Features section showcasing key features with icons and descriptions -->
+    <section class="features">
+        <div class="feature">
+            <i class="fas fa-tachometer-alt"></i>
+            <h3>Fast Performance</h3>
+            <p>Our platform is optimized for speed and efficiency.</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-user-friends"></i>
+            <h3>User Friendly</h3>
+            <p>Experience a seamless and intuitive interface.</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-headset"></i>
+            <h3>Reliable Support</h3>
+            <p>We provide 24/7 assistance to ensure satisfaction.</p>
+        </div>
+    </section>
+
+    <!-- Footer section with contact and social media information -->
+    <footer>
+        <p>Contact: juliuschimaobi6@gmail.com | Phone: +234 123 456 7890</p>
+        <p>Follow us on Twitter: @jutelabss | LinkedIn: Julius Monday</p>
+        <p>&copy; 2025 Julius Monday. All rights reserved.</p>
+    </footer>
+</body>
+</html>
