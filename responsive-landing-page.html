@@ -3,70 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Webpage</title>
+    <title>Responsive Landing Page</title>
     <!-- Including Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        header { background: linear-gradient(135deg, #007bff, #333); color: #fff; padding: 1rem; text-align: center; }
-        header h1 { margin: 0; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+        }
 
-        /* Hero section styling for a welcoming appearance */
-        .hero { padding: 2rem; text-align: center; background: #f4f4f4; height: 50vh;}
-        .hero h2 { margin-bottom: 0.5rem; }
-        .hero p { margin-bottom: 1rem; }
-        .hero button { padding: 0.5rem 1rem; background: #007bff; color: #fff; border: none; cursor: pointer; border-radius: 5px; }
+        /* Header styling */
+        header {
+            background: #033;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
 
-        /* Feature section using flexbox for responsiveness and gap between features */
-        .features { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; padding: 2rem; }
-        .feature { background: #eee; padding: 1rem; flex: 1 1 300px; max-width: 300px; text-align: center; border-radius: 8px; }
-        .feature i { font-size: 2rem; margin-bottom: 0.5rem; color: #007bff; }
+        header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
 
-        /* Footer styling for consistent background and text alignment */
-        footer { background: linear-gradient(135deg,#333, #007bff); text-align: center; padding: 1rem; }
-        footer p { margin: 0.5rem 0; color: #f4f4f4;}
+        /* Hero section */
+        .hero {
+            background: linear-gradient(135deg, #007bff, #033);
+            color: white;
+            text-align: center;
+            padding: 4rem 1rem;
+        }
 
-        /* Responsive design for smaller screens */
+        .hero h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero button {
+            padding: 0.7rem 1.5rem;
+            background-color: #033;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .hero button:hover {
+            background-color: #007bff;
+        }
+
+        /* Features section */
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem;
+            padding: 2rem;
+        }
+
+        .feature {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            flex: 1 1 300px;
+            max-width: 300px;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #007bff;
+        }
+
+        /* Footer styling */
+        footer {
+            background: linear-gradient(135deg, #033, #007bff);
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        footer p {
+            margin: 0.5rem 0;
+        }
+        footer a{
+            color: #f4f4f4;
+        }
+        /* Responsive design */
         @media (max-width: 600px) {
-            .features { flex-direction: column; align-items: center; }
+            .hero h2 {
+                font-size: 1.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .features {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .feature {
+                margin-bottom: 1rem;
+                width: 90%;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header section with the main title -->
+    <!-- Header section -->
     <header>
-        <h1>Responsive Webpage</h1>
+        <h1>Responsive Landing Page</h1>
     </header>
 
-    <!-- Hero section to introduce the service with a call-to-action button -->
+    <!-- Hero section -->
     <section class="hero">
-        <h2>Welcome to Our Service</h2>
-        <p>Discover the best solutions to meet your needs. We provide personalized services that exceed expectations.</p>
-        <button>Learn More</button>
+        <h2>Welcome to Our Platform</h2>
+        <p>We provide the best solutions to meet your needs with cutting-edge technology and professional support.</p>
+        <button>Get Started</button>
     </section>
 
-    <!-- Features section showcasing key features with icons and descriptions -->
+    <!-- Features section -->
     <section class="features">
         <div class="feature">
-            <i class="fas fa-tachometer-alt"></i>
-            <h3>Fast Performance</h3>
-            <p>Our platform is optimized for speed and efficiency.</p>
+            <i class="fas fa-bolt"></i>
+            <h3>Lightning Fast</h3>
+            <p>Our solutions are optimized for speed and performance.</p>
         </div>
         <div class="feature">
-            <i class="fas fa-user-friends"></i>
-            <h3>User Friendly</h3>
-            <p>Experience a seamless and intuitive interface.</p>
+            <i class="fas fa-mobile-alt"></i>
+            <h3>Mobile Friendly</h3>
+            <p>Experience seamless performance across all devices.</p>
         </div>
         <div class="feature">
-            <i class="fas fa-headset"></i>
-            <h3>Reliable Support</h3>
-            <p>We provide 24/7 assistance to ensure satisfaction.</p>
+            <i class="fas fa-lock"></i>
+            <h3>Secure & Reliable</h3>
+            <p>Data protection and reliability are our top priorities.</p>
         </div>
     </section>
 
-    <!-- Footer section with contact and social media information -->
+    <!-- Footer section -->
     <footer>
-        <p>Contact: juliuschimaobi6@gmail.com | Phone: +234 123 456 7890</p>
+        <p>Contact us at: <a href="mailto:juliuschimaobi6@gmail.com">juliuschimaobi6@gmail.com</a></p>
+        <p>Phone: +234 123 456 7890</p>
         <p>Follow us on Twitter: @jutelabss | LinkedIn: Julius Monday</p>
         <p>&copy; 2025 Julius Monday. All rights reserved.</p>
     </footer>
