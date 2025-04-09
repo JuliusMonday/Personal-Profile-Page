@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculator Pro</title>
+  <style>
+    /* Reset and base styles */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background-color: #f5f5f5; font-family: Arial, sans-serif; }
+
+    .calculator-container {
+      width: 400px;
+      margin: 50px auto;
+      background-color: #fff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Header (Brand Section) */
+    .header {
+      background-color: #1f2937; /* Tailwind's bg-gray-900 */
+      color: #fff;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 2px solid #374151; /* A dark gray */
+    }
+    .header .brand {
+      display: flex;
+      align-items: center;
+    }
+    .header .brand i {
+      color: #ffa500; /* Orange color */
+      font-size: 24px;
+      margin-right: 8px;
+    }
+    .header .brand span {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .header .subtitle {
+      font-size: 14px;
+      color: #d1d5db; /* Light gray */
+    }
+
+    /* Display Section */
+    .display-section {
+      background-color: #1f2937;
+      color: #fff;
+      padding: 20px;
+      position: relative;
+      height: 120px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .display-section .prev-display {
+      text-align: right;
+      font-size: 18px;
+      color: #9ca3af; /* Gray-400 */
+      margin-bottom: 5px;
+    }
+    .display-section .current-display {
+      text-align: right;
+      font-size: 42px;
+      font-weight: 300;
+      letter-spacing: 2px;
+    }
+    .display-section .history-toggle {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      background: transparent;
+      border: none;
+      color: #9ca3af;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .history-panel {
+      position: absolute;
+      top: 50px;
+      right: 20px;
+      background-color: #374151;
+      color: #d1d5db;
+      border-radius: 8px;
+      padding: 10px;
+      width: 280px;
+      max-height: 150px;
+      overflow-y: auto;
+      display: none;
+      z-index: 10;
+    }
+    .history-panel .history-item {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+    .history-panel .clear-history {
+      background: transparent;
+      border: none;
+      color: #f87171; /* Red */
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    /* Keypad Styles */
+    .keypad {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-gap: 2px;
+      background-color: #e5e7eb; /* Gray-200 */
+    }
+    .keypad button {
+      padding: 20px;
+      font-size: 20px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .keypad button:hover {
+      background-color: #d1d5db;
+    }
+    /* Button color classes */
+    .btn-default { background-color: #f3f4f6; color: #000; }
+    .btn-operator { background-color: #ffa500; color: #fff; }
+    .btn-equals { background-color: #ffa500; color: #fff; }
+    .btn-clear { background-color: #ff4d4d; color: #fff; }
+    /* Button span for 0 */
+    .span-2 { grid-column: span 2; }
+  </style>
+</head>
+<body>
+  <div class="calculator-container">
+    <!-- Header (Brand Section) -->
+    <div class="header">
+      <div class="brand">
+        <i class="fa fa-calculator"></i>
+        <span>JuTeLabs</span>
+      </div>
+      <div class="subtitle">Calculator Pro</div>
+    </div>
+
+    <!-- Display Section -->
+    <div class="display-section">
+      <button class="history-toggle" id="toggleHistory"><i class="fa fa-history"></i></button>
+      <div class="history-panel" id="historyPanel">
+        <div id="historyItems"></div>
+        <button class="clear-history" id="clearHistory">Clear History</button>
+      </div>
+      <div class="prev-display" id="prevDisplay"></div>
+      <div class="current-display" id="currentDisplay">0</div>
+    </div>
+
+    <!-- Keypad -->
+    <div class="keypad">
+      <!-- First Row -->
+      <button class="btn-clear" id="clear">AC</button>
+      <button class="btn-default" id="toggleSign">+/-</button>
+      <button class="btn-default" id="percentage">%</button>
+      <button class="btn-operator" data-op="÷">÷</button>
+      
+      <!-- Second Row -->
+      <button class="btn-default" data-num="7">7</button>
+      <button class="btn-default" data-num="8">8</button>
+      <button class="btn-default" data-num="9">9</button>
+      <button class="btn-operator" data-op="×">×</button>
+      
+      <!-- Third Row -->
+      <button class="btn-default" data-num="4">4</button>
+      <button class="btn-default" data-num="5">5</button>
+      <button class="btn-default" data-num="6">6</button>
+      <button class="btn-operator" data-op="-">-</button>
+      
+      <!-- Fourth Row -->
+      <button class="btn-default" data-num="1">1</button>
+      <button class="btn-default" data-num="2">2</button>
+      <button class="btn-default" data-num="3">3</button>
+      <button class="btn-operator" data-op="+">+</button>
+      
+      <!-- Fifth Row -->
+      <button class="btn-default span-2" data-num="0">0</button>
+      <button class="btn-default" data-num=".">.</button>
+      <button class="btn-equals" id="equals">=</button>
+    </div>
+  </div>
+
+  <!-- Font Awesome CDN for Icons -->
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  <script>
+    // State Variables
+    let displayValue = "0";
+    let prevValue = "";
+    let operation = "";
+    let history = [];
+    let historyVisible = false;
+
+    // Element Selectors
+    const currentDisplay = document.getElementById("currentDisplay");
+    const prevDisplay = document.getElementById("prevDisplay");
+    const toggleHistoryBtn = document.getElementById("toggleHistory");
+    const historyPanel = document.getElementById("historyPanel");
+    const historyItems = document.getElementById("historyItems");
+    const clearHistoryBtn = document.getElementById("clearHistory");
+
+    // Update Display Function
+    function updateDisplay() {
+      currentDisplay.textContent = displayValue;
+      prevDisplay.textContent = prevValue && operation ? `${prevValue} ${operation}` : "";
+    }
+
+    // Render History
+    function renderHistory() {
+      historyItems.innerHTML = "";
+      history.forEach(item => {
+        const div = document.createElement("div");
+        div.className = "history-item";
+        div.textContent = item;
+        historyItems.appendChild(div);
+      });
+      clearHistoryBtn.style.display = history.length > 0 ? "block" : "none";
+    }
+
+    // Toggle History Panel Visibility
+    toggleHistoryBtn.addEventListener("click", () => {
+      historyVisible = !historyVisible;
+      historyPanel.style.display = historyVisible ? "block" : "none";
+    });
+
+    // Clear History
+    clearHistoryBtn.addEventListener("click", () => {
+      history = [];
+      renderHistory();
+    });
+
+    // Number Buttons
+    document.querySelectorAll("[data-num]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const num = btn.getAttribute("data-num");
+        if (displayValue === "0" || displayValue === "Error") {
+          displayValue = num;
+        } else {
+          displayValue += num;
+        }
+        updateDisplay();
+      });
+    });
+
+    // Operator Buttons
+    document.querySelectorAll("[data-op]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (displayValue !== "Error") {
+          prevValue = displayValue;
+          operation = btn.getAttribute("data-op");
+          displayValue = "0";
+          updateDisplay();
+        }
+      });
+    });
+
+    // Calculate Result
+    function calculate() {
+      if (prevValue !== "" && operation !== "" && displayValue !== "Error") {
+        const a = parseFloat(prevValue);
+        const b = parseFloat(displayValue);
+        let result = 0;
+        switch(operation) {
+          case "+":
+            result = a + b;
+            break;
+          case "-":
+            result = a - b;
+            break;
+          case "×":
+            result = a * b;
+            break;
+          case "÷":
+            if (b === 0) {
+              displayValue = "Error";
+              updateDisplay();
+              return;
+            }
+            result = a / b;
+            break;
+        }
+        // Save calculation to history and update display
+        history.push(`${prevValue} ${operation} ${displayValue} = ${result}`);
+        renderHistory();
+        displayValue = result.toString();
+        prevValue = "";
+        operation = "";
+        updateDisplay();
+      }
+    }
+
+    // Equals Button
+    document.getElementById("equals").addEventListener("click", calculate);
+
+    // Clear Button
+    document.getElementById("clear").addEventListener("click", () => {
+      displayValue = "0";
+      prevValue = "";
+      operation = "";
+      updateDisplay();
+    });
+
+    // Toggle Sign (+/-)
+    document.getElementById("toggleSign").addEventListener("click", () => {
+      if (displayValue !== "0" && displayValue !== "Error") {
+        displayValue = (parseFloat(displayValue) * -1).toString();
+        updateDisplay();
+      }
+    });
+
+    // Percentage Function
+    document.getElementById("percentage").addEventListener("click", () => {
+      if (displayValue !== "Error") {
+        displayValue = (parseFloat(displayValue) / 100).toString();
+        updateDisplay();
+      }
+    });
+
+    // Initialize display
+    updateDisplay();
+  </script>
+</body>
+</html>
