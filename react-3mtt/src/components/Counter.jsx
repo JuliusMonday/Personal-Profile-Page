@@ -58,10 +58,10 @@ const Counter = () => {
                       <p className="message-txt">{ message }</p>
                 </div>
                 <div className="button-container">
-                    <div className="minus-btn" onClick={decrementCounter}>
+                    <div className="decrease-btn" onClick={decrementCounter}>
                         <i className="fas fa-minus text-xl"></i>
                     </div>
-                    <div className="add-btn" onClick={addCounter}>
+                    <div className="increase-btn" onClick={addCounter}>
                         <i className="fas fa-plus text-xl"></i>
                     </div>
                 </div>
