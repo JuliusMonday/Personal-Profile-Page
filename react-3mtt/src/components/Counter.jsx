@@ -1,14 +1,49 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import "./Counter.css"
+
 const Counter = () => {
     const [counter, setCounter] = useState(0);
+    const [message, setMessage] = useState("Welcome to the counter!")
     // add button function
     const addCounter = () => {
-        setCounter((previousCount)=> previousCount + 1)
+        setCounter((previousCount) => previousCount + 1)
     }
     const decrementCounter = () => {
-        setCounter((previousCount)=>previousCount-1)
+        setCounter((previousCount) => {
+            if (previousCount < 1) {
+                return 0
+            } else {
+                return previousCount - 1
+            }
+            
+        })
     }
+    // modification of messsages
+
+    useEffect(() => {
+        if (counter == 0) {
+            setMessage(
+                <>
+                You've reached the limit!! Can't go below{" "}
+                <span className="counter-color">{counter}</span>
+              </>
+            )
+        } else if (counter > 0) {
+            setMessage(
+                <>
+                  You've increased counter to{" "}
+                  <span className="counter-color">{counter}</span>!
+                </>
+              );
+        } else {
+            setMessage(
+                <>
+                  You've decreased counter to{" "}
+                  <span className="counter-color">{counter}</span>!
+                </>
+              );
+        }
+    },[counter])
   return (
       <>
           <div className="counter-container">
@@ -20,7 +55,7 @@ const Counter = () => {
                       <h1 class="gradient-text">{ counter }</h1>
                 </div>
                 <div className="message-container">
-                    <p className="message-txt">Welcome to the counter!</p>
+                      <p className="message-txt">{ message }</p>
                 </div>
                 <div className="button-container">
                     <div className="minus-btn" onClick={decrementCounter}>
